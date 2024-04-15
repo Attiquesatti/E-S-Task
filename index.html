@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Power Distribution System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <h2>Power Source</h2>
+            <button id="myBtn" class="btn">Add</button>
+        </div>
+        <div class="box">
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div class="modalform">
+                        <form id="modalForm">
+                            <label>Name</label>
+                            <input type="text" id="fname" name="firstname" placeholder="Your name" required>
+
+                            <label>Order</label>
+                            <input type="number" id="lname" name="lastname" placeholder="Order" required>
+
+                            <label>Type</label>
+                            <select id="visualizationType" required>
+                                <option value="" disabled selected hidden>Select Type</option>
+                                <option value="Chart">Chart</option>
+                                <option value="Table">Table</option>
+                            </select>
+
+                            <div id="chartInputs" style="display: none;">
+                                <label>Total Value</label>
+                                <input type="number" id="chartTotalValue" placeholder="Total Value">
+                                <br>
+                                <label>Current Value</label>
+                                <input type="number" id="chartCurrentValue" placeholder="Current Value">
+                            </div>
+
+                            <div id="tableInputs" style="display: none;">
+                                <label>Total Value</label>
+                                <input type="number" id="tableTotalValue" placeholder="Total Value">
+                                <br>
+                                <label>Current Value</label>
+                                <input type="number" id="tableCurrentValue" placeholder="Current Value">
+                            </div>
+
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="output">
+                <p>No data Found</p>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
