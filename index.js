@@ -7,6 +7,9 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+// Get submit element that submits the data
+var submit = document.getElementById("submit");
+
 // When the user clicks the button, open the modal 
 btn.onclick = function () {
     modal.style.display = "block";
@@ -23,7 +26,6 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
-
 // Array to store form data objects
 var formDataArray = [];
 
@@ -82,7 +84,11 @@ function handleSubmit(event) {
 
     // Display form data
     displayFormData();
+
+    // Close the modal
+    modal.style.display = "none";
 }
+
 
 // Function to display form data
 function displayFormData() {
@@ -111,9 +117,13 @@ function displayFormData() {
         var deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
         deleteBtn.classList.add("deleteBtn");
-        deleteBtn.onclick = function() {
-            deleteEntry(index);
+        deleteBtn.onclick = function () {
+            // Ask for confirmation
+            if (confirm("Are you sure you want to delete this entry?")) {
+                deleteEntry(index);
+            }
         };
+
         formDataDiv.appendChild(deleteBtn);
 
         // Create edit button
@@ -128,7 +138,6 @@ function displayFormData() {
         outputDiv.appendChild(formDataDiv);
     });
 }
-
 // Function to delete entry
 function deleteEntry(index) {
     formDataArray.splice(index, 1);
@@ -137,7 +146,6 @@ function deleteEntry(index) {
 
 // Function to edit entry
 function editEntry(index) {
-    // console.log("Edit button clicked for index: ", index); // Log to check if the edit button click event is triggered
 
     var formData = formDataArray[index];
     // console.log("Form data to edit: ", formData); // Log to check the form data to edit
@@ -146,17 +154,6 @@ function editEntry(index) {
     document.getElementById("lname").value = formData.order;
     document.getElementById("visualizationType").value = formData.type;
 
-    // Toggle input visibility based on visualization type
-    toggleInputs();
-
-    // Get total value and current value based on selected visualization type
-    if (formData.type === "Chart") {
-        document.getElementById("chartTotalValue").value = formData.totalValue;
-        document.getElementById("chartCurrentValue").value = formData.currentValue;
-    } else if (formData.type === "Table") {
-        document.getElementById("tableTotalValue").value = formData.totalValue;
-        document.getElementById("tableCurrentValue").value = formData.currentValue;
-    }
 }
 
 
