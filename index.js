@@ -196,7 +196,7 @@ updateBtn.onclick = function() {
 };
 
 // Append the update button to the modal
-modalForm.append(updateBtn);
+modal.append(updateBtn);
 
 // Function to edit entry
 function editEntry(index) {
