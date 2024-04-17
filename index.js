@@ -13,6 +13,10 @@ var submit = document.getElementById("submit");
 // When the user clicks the button, open the modal 
 btn.onclick = function () {
     modal.style.display = "block";
+   
+    document.getElementById('updateBtn').style.display = "none";
+    submit.style.display = "block";
+
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -144,7 +148,7 @@ function deleteEntry(index) {
     displayFormData();
 }
 
-// Function to edit entry
+
 // function editEntry(index) {
 
 //     var formData = formDataArray[index];
@@ -162,15 +166,41 @@ function deleteEntry(index) {
 //     console.log(formData.totalValue);
 //     console.log(formData. currentValue);
 // }
-// Create the update button
-var updateBtn = document.createElement("button");
-updateBtn.textContent = "UpdateEntry";
-updateBtn.classList.add("updateBtn");
-updateBtn.style.display = "none"; // Initially hide the update button
-updateBtn.style.position = "absolute";
-updateBtn.style.left = "50%";
-updateBtn.style.transform = "translateX(-50%)";
-updateBtn.onclick = function() {
+// Function to edit entry
+function editEntry(index) {
+    var formData = formDataArray[index];
+
+    // Populate modal fields with data from the specified index
+    document.getElementById("fname").value = formData.name;
+    document.getElementById("lname").value = formData.order;
+    document.getElementById("visualizationType").value = formData.type;
+    
+    // Populate total and current values based on visualization type
+    if (formData.type === "Chart") {
+        document.getElementById("chartTotalValue").value = formData.totalValue;
+        document.getElementById("chartCurrentValue").value = formData.currentValue;
+    } else if (formData.type === "Table") {
+        document.getElementById("tableTotalValue").value = formData.totalValue;
+        document.getElementById("tableCurrentValue").value = formData.currentValue;
+    }
+
+    // Show the update button
+    // updateBtn.style.display = "block";
+
+    // // //hide submit button
+    // submit.style.display = "none";
+
+    document.getElementById('updateBtn').style.display = "block";
+    submit.style.display = "none";
+    // Set the index of the current editing entry to the modal attribute
+    modal.setAttribute("data-edit-index", index);
+
+    // Display the modal
+    modal.style.display = "block";
+}
+
+var update_btn = document.getElementById('updateBtn');
+update_btn.onclick = function() {
     // Get the index of the current editing entry
     var index = parseInt(modal.getAttribute("data-edit-index"));
     
@@ -194,42 +224,6 @@ updateBtn.onclick = function() {
     // Update the displayed data
     displayFormData();
 };
-
-// Append the update button to the modal
-modal.append(updateBtn);
-
-// Function to edit entry
-function editEntry(index) {
-    var formData = formDataArray[index];
-
-    // Populate modal fields with data from the specified index
-    document.getElementById("fname").value = formData.name;
-    document.getElementById("lname").value = formData.order;
-    document.getElementById("visualizationType").value = formData.type;
-    
-    // Populate total and current values based on visualization type
-    if (formData.type === "Chart") {
-        document.getElementById("chartTotalValue").value = formData.totalValue;
-        document.getElementById("chartCurrentValue").value = formData.currentValue;
-    } else if (formData.type === "Table") {
-        document.getElementById("tableTotalValue").value = formData.totalValue;
-        document.getElementById("tableCurrentValue").value = formData.currentValue;
-    }
-
-    // Show the update button
-    updateBtn.style.display = "block";
-    updateBtn.style.display = "center";
-
-    //hide submit button
-    submit.style.display = "none";
-
-    // Set the index of the current editing entry to the modal attribute
-    modal.setAttribute("data-edit-index", index);
-
-    // Display the modal
-    modal.style.display = "block";
-}
-
 
 
 // Event listener for form submission

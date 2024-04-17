@@ -126,10 +126,6 @@ input[type=submit]:hover {
     border-radius: 4px;
     margin: 5px;
 }
-
-.editBtn {
-    left: 70px; /* Adjust position of edit button */
-}
 .updateBtn {
     padding: 10px 25px;
     cursor: pointer;
@@ -137,7 +133,8 @@ input[type=submit]:hover {
     background-color: #f44336;
     color: white;
     border-radius: 4px;
-    margin: 5px;
+    display: block;
+    margin: auto;
 }
 .deleteBtn:hover,
 .editBtn:hover,
