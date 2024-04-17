@@ -145,16 +145,91 @@ function deleteEntry(index) {
 }
 
 // Function to edit entry
+// function editEntry(index) {
+
+//     var formData = formDataArray[index];
+
+//     document.getElementById("fname").value = formData.name;
+//     document.getElementById("lname").value = formData.order;
+//     document.getElementById("visualizationType").value = formData.type;
+
+//     modal.style.display = "block";
+
+//     console.log(formData +'Tesing edit');
+//     console.log(formData.name);
+//     console.log(formData.order);
+//     console.log(formData.type);
+//     console.log(formData.totalValue);
+//     console.log(formData. currentValue);
+// }
+// Create the update button
+var updateBtn = document.createElement("button");
+updateBtn.textContent = "UpdateEntry";
+updateBtn.classList.add("updateBtn");
+updateBtn.style.display = "none"; // Initially hide the update button
+updateBtn.style.position = "absolute";
+updateBtn.style.left = "50%";
+updateBtn.style.transform = "translateX(-50%)";
+updateBtn.onclick = function() {
+    // Get the index of the current editing entry
+    var index = parseInt(modal.getAttribute("data-edit-index"));
+    
+    // Update the formDataArray with the new values from the modal fields
+    formDataArray[index].name = document.getElementById("fname").value;
+    formDataArray[index].order = document.getElementById("lname").value;
+    formDataArray[index].type = document.getElementById("visualizationType").value;
+    
+    // Update total and current values based on visualization type
+    if (formDataArray[index].type === "Chart") {
+        formDataArray[index].totalValue = document.getElementById("chartTotalValue").value;
+        formDataArray[index].currentValue = document.getElementById("chartCurrentValue").value;
+    } else if (formDataArray[index].type === "Table") {
+        formDataArray[index].totalValue = document.getElementById("tableTotalValue").value;
+        formDataArray[index].currentValue = document.getElementById("tableCurrentValue").value;
+    }
+
+    // Hide the modal
+    modal.style.display = "none";
+
+    // Update the displayed data
+    displayFormData();
+};
+
+// Append the update button to the modal
+modalForm.append(updateBtn);
+
+// Function to edit entry
 function editEntry(index) {
-
     var formData = formDataArray[index];
-    // console.log("Form data to edit: ", formData); // Log to check the form data to edit
 
+    // Populate modal fields with data from the specified index
     document.getElementById("fname").value = formData.name;
     document.getElementById("lname").value = formData.order;
     document.getElementById("visualizationType").value = formData.type;
+    
+    // Populate total and current values based on visualization type
+    if (formData.type === "Chart") {
+        document.getElementById("chartTotalValue").value = formData.totalValue;
+        document.getElementById("chartCurrentValue").value = formData.currentValue;
+    } else if (formData.type === "Table") {
+        document.getElementById("tableTotalValue").value = formData.totalValue;
+        document.getElementById("tableCurrentValue").value = formData.currentValue;
+    }
 
+    // Show the update button
+    updateBtn.style.display = "block";
+    updateBtn.style.display = "center";
+
+    //hide submit button
+    submit.style.display = "none";
+
+    // Set the index of the current editing entry to the modal attribute
+    modal.setAttribute("data-edit-index", index);
+
+    // Display the modal
+    modal.style.display = "block";
 }
+
 
 
 // Event listener for form submission

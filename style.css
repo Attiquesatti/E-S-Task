@@ -131,10 +131,22 @@ input[type=submit]:hover {
 .editBtn {
     left: 70px; /* Adjust position of edit button */
 }
-
+.updateBtn {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    border-radius: 4px;
+    margin: 5px;
+}
 .deleteBtn:hover,
-.editBtn:hover {
+.editBtn:hover,
+.updateBtn:hover {
     background-color: #d32f2f;
+}
+#modalForm{
+    margin-bottom: 22px;
 }
 @media screen and (max-width: 1024px) {
     .formDataBox {
